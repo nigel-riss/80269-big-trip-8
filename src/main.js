@@ -1,6 +1,7 @@
+import getTripPoint from './modules/get-trip-point';
 import renderFilter from './modules/render-filter';
 import renderTripPoint from './modules/render-trip-point';
-import {generateRandomInt, insertHTMLToElement} from './modules/utils';
+import {getRandomInt, insertHTMLToElement} from './modules/utils';
 
 
 const addMultipleTripPoints = (quantity) => {
@@ -8,7 +9,7 @@ const addMultipleTripPoints = (quantity) => {
   tripDayItems.innerHTML = ``;
   let tripsHtml = ``;
   for (let i = 0; i < quantity; i++) {
-    tripsHtml += renderTripPoint();
+    tripsHtml += renderTripPoint(getTripPoint());
   }
   insertHTMLToElement(tripDayItems, tripsHtml);
 };
@@ -28,11 +29,11 @@ filtersOptions.forEach((filterOptions) => {
 insertHTMLToElement(tripFilter, filtersHtml);
 
 // Drawing trip points
-addMultipleTripPoints(7);
+// addMultipleTripPoints(7);
 
 // Add random quantity of trip points on filter click
 document.addEventListener(`click`, (evt) => {
   if (evt.target.classList.contains(`trip-filter__item`)) {
-    addMultipleTripPoints(generateRandomInt(1, 7));
+    addMultipleTripPoints(getRandomInt(1, 7));
   }
 });
